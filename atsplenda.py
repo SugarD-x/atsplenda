@@ -1,7 +1,7 @@
 # Work with Python 3.6
 import discord
 
-TOKEN = 'NTYwNDQ2Mjk5MDQwNjQ1MTIy.D30D6Q.hNV_vjd1UQdwdaA_xTXhc3NaD1w'
+TOKEN = 'token'
 
 client = discord.Client()
 
@@ -40,6 +40,8 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
+    game = discord.Game("Minecraft, but for Bots")
+    await client.change_presence(status=discord.Status.idle, activity=game)
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
