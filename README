@@ -1,3 +1,6 @@
 A stupid simple bot. mainly for allowing people to @splenda using the right name.
 
 also responds to some random crap, because we thought it needed to do more
+
+originally discord.js. now in discord.py with enhanced features
+
