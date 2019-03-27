@@ -1,5 +1,7 @@
 # Work with Python 3.6
 import discord
+import random
+import asyncio
 
 TOKEN = 'token'
 
@@ -12,7 +14,7 @@ async def on_message(message):
         return
 
     if "@splenda" in message.content.lower():
-        msg = '<@385933420389335061>'.format(message)
+        msg = '{0.author.mention} mentioned you splenda. <@385933420389335061>'.format(message)
         await message.channel.send(msg)
 
     if "@spnexa" in message.content.lower():
@@ -20,7 +22,7 @@ async def on_message(message):
         await message.channel.send(msg)
 
     if message.content.startswith('bitch'):
-        msg = 'lasagna'.format(message)
+        msg = 'LASAGNA!!!'.format(message)
         await message.channel.send(msg)
 
     if message.content.startswith(':))))'):
@@ -36,6 +38,8 @@ async def on_message(message):
         #await client.send_message(message.channel, msg)
         await message.channel.send(msg)
 
+    if message.content.startswith('!deleteme'):
+       await message.channel.send('I will delete myself now...', delete_after=3.0)
 
 
 @client.event
