@@ -8,6 +8,14 @@ TOKEN = 'token'
 client = discord.Client()
 
 @client.event
+
+#async def on_member_join(self, member):
+#        guild = member.guild
+#        if guild.system_channel is not None:
+#            to_send = 'hey look, a person'.format(member, guild)
+#            await guild.system_channel.send(to_send)
+
+
 async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
@@ -15,14 +23,17 @@ async def on_message(message):
 
     if "@splenda" in message.content.lower():
         msg = '{0.author.mention} mentioned you splenda. <@385933420389335061>'.format(message)
+        print('{0.author.mention} @splendad')
         await message.channel.send(msg)
 
     if "@spnexa" in message.content.lower():
         msg = 'you wish'.format(message)
+        print('someone spnexad')
         await message.channel.send(msg)
 
     if message.content.startswith('bitch'):
         msg = 'LASAGNA!!!'.format(message)
+        print('you india you lose')
         await message.channel.send(msg)
 
     if message.content.startswith(':))))'):
@@ -41,6 +52,9 @@ async def on_message(message):
     if message.content.startswith('!deleteme'):
        await message.channel.send('I will delete myself now...', delete_after=3.0)
 
+#    if message.content.startswith('advertise'):
+#        print('ad')
+#       await client.send_file(message.channel, boobs.jpg)
 
 @client.event
 async def on_ready():
