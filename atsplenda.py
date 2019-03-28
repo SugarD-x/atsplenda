@@ -23,7 +23,7 @@ async def on_message(message):
 
     if "@splenda" in message.content.lower():
         msg = '{0.author.mention} mentioned you splenda. <@385933420389335061>'.format(message)
-        print('{0.author.mention} @splendad')
+        print(msg)
         await message.channel.send(msg)
 
     if "@spnexa" in message.content.lower():
@@ -52,8 +52,18 @@ async def on_message(message):
     if message.content.startswith('!deleteme'):
        await message.channel.send('I will delete myself now...', delete_after=3.0)
 
+    if  "<@560446299040645122>" in message.content.lower():
+        msg = 'ima bot. beep boop. did you mean @splenda?'.format(message)
+        print('boop beep')
+        await message.channel.send(msg)
+
+
+#    if (message.author.id == '385933420389335061'):
+#       return message.channel.send("hi splenda");
+
+
 #    if message.content.startswith('advertise'):
-#        print('ad')
+#       print('ad')
 #       await client.send_file(message.channel, boobs.jpg)
 
 @client.event
