@@ -24,14 +24,11 @@ async def on_message(message):
         print(msg)
         await message.channel.send(msg)
 
-    #510536109990871051
     if message.content.startswith('anon @splenda'):
         msg = 'you were anonymously @ed splenda. <@385933420389335061>'.format(message)
         print('anonsplenda')
         channel = client.get_channel(510536109990871051)
         await channel.send(msg)
-#        await message.channel.send(532806948765171724,msg)
-#        await client.send_message(discord.Object(id='532806948765171724'), 'hello')
 
     if "@spnexa" in message.content.lower():
         msg = 'you wish'.format(message)
@@ -80,6 +77,9 @@ async def on_message(message):
 
     if "polygraph" in message.content.lower():
         await message.channel.send('lie detectors are a lie', file=discord.File('lie-behind-the-lie-detector.pdf'))
+
+    if "getoptifine" in message.content.lower():
+        await message.channel.send('here ya go', file=discord.File('optifine.jar'))
 
     if message.content.startswith('advertise'):
         print('ad')
