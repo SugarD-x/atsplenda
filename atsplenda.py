@@ -50,6 +50,9 @@ async def on_message(message):
         msg = 'Woah, calm yo tits there. no one has that many chins'.format(message)
         await message.channel.send(msg)
 
+    if ':)' == message.content.lower():
+        await message.channel.send('woah there, too much happiness up in here. calm yo tits.'.format(message))
+
     if message.content.startswith('XD'):
         msg = 'lulz'.format(message)
         await message.channel.send(msg)
@@ -84,6 +87,10 @@ async def on_message(message):
     if message.content.startswith('advertise'):
         print('ad')
         await message.channel.send('THIS IS AN ADVERTISEMENT', file=discord.File('boobs.jpg'))
+
+    if 'f' == message.content.lower():
+        print('pay respeccs')
+        await message.channel.send('a salute to the fallen', file=discord.File('F.gif'))
 
 @client.event
 async def on_ready():
