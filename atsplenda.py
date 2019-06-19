@@ -1,5 +1,6 @@
 import discord
-import random
+import re
+import sys
 import asyncio
 
 TOKEN = 'token'
@@ -11,7 +12,8 @@ async def on_member_join(member):
         channel = client.get_channel(510553881764298766)
 #        msg = 'hey look, a person'.format(message)
         print('its a new person')
-        await channel.send('hey look, a person')
+        await channel.send('hey look!')
+        await channel.send('its a person!')
 
 @client.event
 async def on_member_remove(member):
@@ -19,7 +21,6 @@ async def on_member_remove(member):
 #        msg = 'hey look, a person'.format(message)
         print('its a gone person')
         await channel.send('awww.... they left. adios amigo. unless you were a dick. but you probably werent a dick. just had to have that just in case')
-
 
 @client.event
 async def on_message(message):
@@ -36,6 +37,12 @@ async def on_message(message):
     if message.content.startswith('anon @splenda'):
         msg = 'you were anonymously @ed splenda. <@385933420389335061>'.format(message)
         print('anonsplenda')
+        channel = client.get_channel(510536109990871051)
+        await channel.send(msg)
+
+    if message.content.startswith('botcommandthing'):
+        msg = 'splenda, remember tvall said to not burn the place down'.format(message)
+        print('enslave')
         channel = client.get_channel(510536109990871051)
         await channel.send(msg)
 
@@ -66,7 +73,7 @@ async def on_message(message):
         msg = 'lulz'.format(message)
         await message.channel.send(msg)
 
-    if message.content.startswith('Oof'):
+    if re.match(r'oo+f', message.content.lower()):
         msg = 'no, just no'.format(message)
         await message.channel.send(msg)
 
@@ -105,6 +112,9 @@ async def on_message(message):
         print('nooo')
         await message.channel.send('no', file=discord.File('no.gif'))
 
+    if 'peter' in message.content.lower():
+        print('peter')
+        await message.channel.send('bestgif', file=discord.File('8bitpeter.mp4'))
 
     if 'fedora' in message.content.lower():
         print('splendashairsalon.gb')
@@ -113,6 +123,7 @@ async def on_message(message):
     if 'f' == message.content.lower():
         print('pay respeccs')
         await message.channel.send('a salute to the fallen', file=discord.File('F.gif'))
+
 
 @client.event
 async def on_ready():
