@@ -3,6 +3,10 @@ import random
 import re
 import sys
 import asyncio
+try: 
+    from googlesearch import search 
+except ImportError:  
+    print("No module named 'google' found") 
 
 TOKEN = 'token'
 
@@ -42,15 +46,21 @@ async def on_message(message):
         await channel.send(msg)
 
     if message.content.startswith('botcommandthing'):
-        msg = 'no'.format(message)
-        print('enslave')
+        msg = 'someone mention bot?'.format(message)
+        print(';)')
         channel = client.get_channel(510536109990871051)
+        #channel = client.get_channel(510553881764298766)
         await channel.send(msg)
 
     if "@spnexa" in message.content.lower():
         msg = 'you wish'.format(message)
 #        logmsg = '${member.user.tag} spnexad'.format(message)
         print('someone spnexad')
+        await message.channel.send(msg)
+
+    if "uwu" in message.content.lower():
+        msg = 'OwO'.format(message)
+        print('cancer')
         await message.channel.send(msg)
 
     if message.content.startswith(':('):
@@ -60,6 +70,22 @@ async def on_message(message):
         msg = random.choice(messages)
         print('cheerup')
         await message.channel.send(msg.format(message))
+
+    if message.content.startswith('searchxkcd'):
+        query = message.content.lower() + ' site:xkcd.com -site:*.xkcd.com -site:forums.xkcd.com'
+        print(query)
+        #query = 'xkcd sheeple'
+        for j in search(query[10:], tld="com", num=1, stop=1, pause=2): 
+           print(j)  
+        await message.channel.send(j)
+
+    if message.content.startswith('searchcyanide'):
+        query = message.content.lower() + ' site:explosm.net'
+        print(query)
+        #query = 'xkcd sheeple' 
+        for j in search(query[14:], tld="com", num=1, stop=1, pause=2): 
+           print(j)  
+        await message.channel.send(j)
 
     if message.content.startswith('bitch'):
         msg = 'LASAGNA!!!'.format(message)
@@ -111,6 +137,14 @@ async def on_message(message):
     if message.content.startswith('mobileshrug'):
         print('shrug')
         await message.channel.send('shrugs', file=discord.File('shrug.gif'))
+
+    if message.content.startswith('wow'):
+        print('wow')
+        await message.channel.send('https://tenor.com/view/owen-wilson-wow-snapchat-gif-12686549')
+
+    if message.content.startswith(':|'):
+        print(':|')
+        await message.channel.send('cammy wanted a response to this one, so here ya go')
 
     if 'nooo' in message.content.lower():
         print('nooo')
