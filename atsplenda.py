@@ -65,16 +65,12 @@ async def on_message(message):
 
     if "mallcop" in message.content.lower():
         messages = ["A mustache a day keeps the shoplifters at bay", "The correct term is Security Officer", "I'm gonna have to ask you to tone it down. You're scaring off the other shoppers.", "Welcome to the Asshat Mall! Get your shit and get out!", "Enjoy your shopping experience!", "Sir, the area between the escalators is not a slide!", "Ma'am, if you don't leave right now, I will have to call the actual police here to arrest you!", "Our security guards are equipped with the latest in pepper spray technology", "NOT A FUCKING MALLCOP"]
-#        msg = 'cheer up. theres no need to be sad. the world is a wonderful place. i mean, it kinda sucks here. but its as wonderful as you make it. so make it wonderful'.format(message)
-#        msg = 'https://tenor.com/view/30rock-alec-baldwin-there-there-cheer-up-comfort-gif-4215371'.format(message)
         msg = random.choice(messages)
         print('mallcop')
         await message.channel.send(msg.format(message))
 
     if message.content.startswith(':('):
         messages = ["https://tenor.com/view/30rock-alec-baldwin-there-there-cheer-up-comfort-gif-4215371", "cheer up. theres no need to be sad. the world is a wonderful place. i mean, it kinda sucks here. but its as wonderful as you make it. so make it wonderful", "https://tenor.com/view/catbug-everything-is-ok-gif-5943760"]
-#        msg = 'cheer up. theres no need to be sad. the world is a wonderful place. i mean, it kinda sucks here. but its as wonderful as you make it. so make it wonderful'.format(message)
-#        msg = 'https://tenor.com/view/30rock-alec-baldwin-there-there-cheer-up-comfort-gif-4215371'.format(message)
         msg = random.choice(messages)
         print('cheerup')
         await message.channel.send(msg.format(message))
@@ -94,6 +90,11 @@ async def on_message(message):
         for j in search(query[14:], tld="com", num=1, stop=1, pause=2): 
            print(j)  
         await message.channel.send(j)
+
+    if message.content.startswith("I'm"):
+        query = message.content.lower() + ", I'm dad"
+        dadjoke = 'hi' + query[3:]
+        await message.channel.send(dadjoke)
 
     if message.content.startswith('bitch'):
         msg = 'LASAGNA!!!'.format(message)
