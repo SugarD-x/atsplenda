@@ -28,6 +28,15 @@ async def on_member_remove(member):
         await channel.send('awww.... they left. adios amigo. unless you were a dick. but you probably werent a dick. just had to have that just in case')
 
 @client.event
+async def console_input():
+    await client.wait_until_ready()
+    msg = input('> Message to send: ')
+    await client.send_message(discord.Object(id=672990761607757837), msg)
+    print('')
+    await console_input()
+
+
+@client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
@@ -46,10 +55,10 @@ async def on_message(message):
         await channel.send(msg)
 
     if message.content.startswith('botcommandthing'):
-        msg = 'someone mention bot?'.format(message)
+        msg = "Your mother"
         print(';)')
-        channel = client.get_channel(510536109990871051)
-        #channel = client.get_channel(510553881764298766)
+        #channel = client.get_channel(672990761607757837)
+        channel = client.get_channel(679189513750446110)
         await channel.send(msg)
 
     if "@spnexa" in message.content.lower():
@@ -91,10 +100,16 @@ async def on_message(message):
            print(j)  
         await message.channel.send(j)
 
+#    if re.match(r'\bi\'?m', message.content.lower(), re.IGNORECASE):
     if message.content.startswith("I'm"):
-        query = message.content.lower() + ", I'm dad"
-        dadjoke = 'hi' + query[3:]
+        #query = message.content.lower()
+        dadjoke = 'hi' + message.content.lower()[3:] + ", I'm dad"
+        print(dadjoke)
         await message.channel.send(dadjoke)
+
+    if "have a cookie" in message.content.lower():
+        msg = "I LOVE COOKIES".format(message)
+        await message.channel.send(msg)
 
     if message.content.startswith('bitch'):
         msg = 'LASAGNA!!!'.format(message)
@@ -147,9 +162,21 @@ async def on_message(message):
         print('shrug')
         await message.channel.send('shrugs', file=discord.File('shrug.gif'))
 
+    if message.content.startswith('deletedtvallresponse'):
+        print('delete')
+#        await message.channel.send('you deleted him', file=discord.File('delete.png'))
+#        msg = 'you were anonymously @ed splenda. <@385933420389335061>'.format(message)
+        print('anonsplenda')
+        channel = client.get_channel(510536109990871051)
+        await channel.send('you deleted him', file=discord.File('delete.png'))
+
+
+
     if message.content.startswith('wow'):
         print('wow')
-        await message.channel.send('https://tenor.com/view/owen-wilson-wow-snapchat-gif-12686549')
+        messages = ["https://tenor.com/view/owen-wilson-wow-snapchat-gif-12686549", "https://tenor.com/view/mindblown-amazed-explosion-space-omg-gif-10279314", "https://tenor.com/view/jaw-drop-shocked-surprised-omg-amazed-gif-4919080"]
+        msg = random.choice(messages)
+        await message.channel.send(msg)
 
     if message.content.startswith(':|'):
         print(':|')
@@ -171,6 +198,9 @@ async def on_message(message):
         print('pay respeccs')
         await message.channel.send('a salute to the fallen', file=discord.File('F.gif'))
 
+    if 'bad bot' in message.content.lower():
+        print('splendas a dick')
+        await message.channel.send("you're not my dad")
 
 @client.event
 async def on_ready():
@@ -180,5 +210,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+    #console_input()
 
 client.run(TOKEN)
