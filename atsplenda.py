@@ -18,14 +18,14 @@ async def on_member_join(member):
 #        msg = 'hey look, a person'.format(message)
         print('its a new person')
         await channel.send('hey look!')
-        await channel.send('its a person!')
+        await channel.send('its a person! ' + member.mention)
 
 @client.event
 async def on_member_remove(member):
         channel = client.get_channel(510553881764298766)
 #        msg = 'hey look, a person'.format(message)
         print('its a gone person')
-        await channel.send('awww.... they left. adios amigo. unless you were a dick. but you probably werent a dick. just had to have that just in case')
+        await channel.send('awww.... ' + member.mention + ' left. adios amigo. unless you were a dick. but you probably werent a dick. had to have that just in case')
 
 @client.event
 async def console_input():
