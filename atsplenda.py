@@ -12,6 +12,7 @@ TOKEN = 'token'
 
 client = discord.Client()
 
+
 @client.event
 async def on_member_join(member):
         channel = client.get_channel(510553881764298766)
@@ -70,7 +71,24 @@ async def on_message(message):
     if "uwu" in message.content.lower():
         msg = 'OwO'.format(message)
         print('cancer')
+        file = open('cancer', 'r')
+        cancer = file.read()
+        converted_num = int(cancer) 
+
+        cancer1 = converted_num + 1
+        file.close()
+        file = open('cancer', 'w')
+        file.write(str(cancer1))
+        file.close()
         await message.channel.send(msg)
+
+    if "cancercounter" in message.content.lower():
+        cancer = 0
+        file = open('cancer', 'r')
+        msg = file.read()
+        file.close()
+        await message.channel.send(msg)
+
 
     if "mallcop" in message.content.lower():
         messages = ["A mustache a day keeps the shoplifters at bay", "The correct term is Security Officer", "I'm gonna have to ask you to tone it down. You're scaring off the other shoppers.", "Welcome to the Asshat Mall! Get your shit and get out!", "Enjoy your shopping experience!", "Sir, the area between the escalators is not a slide!", "Ma'am, if you don't leave right now, I will have to call the actual police here to arrest you!", "Our security guards are equipped with the latest in pepper spray technology", "NOT A FUCKING MALLCOP"]
