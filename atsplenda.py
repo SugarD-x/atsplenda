@@ -25,8 +25,8 @@ async def on_member_join(member):
 async def on_member_remove(member):
         channel = client.get_channel(510553881764298766)
 #        msg = 'hey look, a person'.format(message)
-        print('its a gone person')
-        await channel.send('awww.... ' + member.mention + ' left. adios amigo. unless you were a dick. but you probably werent a dick. had to have that just in case')
+        print('its a gone person' + member.name)
+        await channel.send('awww.... ' + member.name + ' left. adios amigo. unless you were a dick. but you probably werent a dick. had to have that just in case')
 
 @client.event
 async def console_input():
@@ -147,6 +147,18 @@ async def on_message(message):
 
     if re.match(r'oo+f', message.content.lower()):
         msg = 'no, just no'.format(message)
+        print('cancer')
+        file = open('cancer', 'r')
+        cancer = file.read()  
+        converted_num = int(cancer) 
+
+        cancer1 = converted_num + 1
+        file.close()
+        file = open('cancer', 'w')
+        file.write(str(cancer1))
+        file.close()
+
+
         await message.channel.send(msg)
 
     if message.content.startswith('D:'):
