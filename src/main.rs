@@ -40,8 +40,8 @@ impl EventHandler for Handler {
                 println!("Error sending message: {:?}", why);
             }
         }
-        if msg.content == "f" {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "salute").await {
+        if msg.content.to_lowercase() == "f" {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "salute to the fallen https://tenor.com/view/press-f-pay-respect-keyboard-gif-12855017").await {
                 println!("Error sending message: {:?}", why);
             }
         }
