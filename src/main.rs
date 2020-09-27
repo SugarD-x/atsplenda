@@ -40,13 +40,18 @@ impl EventHandler for Handler {
                 println!("Error sending message: {:?}", why);
             }
         }
-        if msg.content.to_lowercase == "f" {
+        if msg.content == "f" {
             if let Err(why) = msg.channel_id.say(&ctx.http, "salute").await {
                 println!("Error sending message: {:?}", why);
             }
         }
         if msg.content.contains("@splenda") {
             if let Err(why) = msg.channel_id.say(&ctx.http, "<user> mentioned you, splenda. <@385933420389335061>").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
+        if msg.content.contains("wow") {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/owen-wilson-wow-snapchat-gif-12686549").await {
                 println!("Error sending message: {:?}", why);
             }
         }
