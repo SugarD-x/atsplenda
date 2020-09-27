@@ -1,0 +1,9 @@
+[package]
+name = "atsplenda"
+version = "0.1.0"
+authors = ["tvall <tvall43@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+serenity = { default-features = false, features = ["client", "gateway", "rustls_backend", "model"] }
+tokio = "0.2.22"
