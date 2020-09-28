@@ -48,7 +48,8 @@ impl EventHandler for Handler {
 
         if msg.content.starts_with("I'm") {
             //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "Hi <feature unfinished>, I'm dad.").await {
+            let copied = msg.content.replace("I'm", "");
+            if let Err(why) = msg.channel_id.say(&ctx.http, ("Hi".to_owned() + &copied + ", I'm dad.")).await {
                 println!("Error sending message: {:?}", why);
             }
         }
