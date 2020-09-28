@@ -33,12 +33,52 @@ impl EventHandler for Handler {
 
         if msg.content.starts_with("I'm") {
             //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "Hi message.content, I'm dad.").await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "Hi <feature unfinished>, I'm dad.").await {
                 println!("Error sending message: {:?}", why);
             }
         }
-
-
+        if msg.content.contains("uwu") {
+            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "OwO").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
+        if msg.content.contains("oof") {
+            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "no").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
+        if msg.content.contains("mallcop") {
+            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "A mustache a day keeps the shoplifters at bay").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
+        if msg.content.to_lowercase().contains("nooo") {
+            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/no-theoffice-stevecarrell-michaelscott-gif-4652931").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
+        if msg.content.to_lowercase().contains("bad bot") {
+            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "you're not my dad").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
+        if msg.content.to_lowercase().contains("peter") {
+            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "coming soon").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
+        if msg.content.to_lowercase().contains(":(") {
+            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/30rock-alec-baldwin-there-there-cheer-up-comfort-gif-4215371").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
         if msg.content.starts_with("D:") {
             if let Err(why) = msg.channel_id.say(&ctx.http, "shocking").await {
                 println!("Error sending message: {:?}", why);
