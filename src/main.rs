@@ -30,6 +30,15 @@ impl EventHandler for Handler {
             }
 
         }
+
+        if msg.content.starts_with("I'm") {
+            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "Hi message.content, I'm dad.").await {
+                println!("Error sending message: {:?}", why);
+            }
+        }
+
+
         if msg.content.starts_with("D:") {
             if let Err(why) = msg.channel_id.say(&ctx.http, "shocking").await {
                 println!("Error sending message: {:?}", why);
@@ -46,7 +55,7 @@ impl EventHandler for Handler {
             }
         }
         if msg.content.contains("@splenda") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "<user> mentioned you, splenda. <@385933420389335061>").await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, (msg.author.to_string() + " mentioned you, splenda. <@385933420389335061>")).await {
                 println!("Error sending message: {:?}", why);
             }
         }
