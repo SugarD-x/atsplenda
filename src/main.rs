@@ -1,8 +1,23 @@
 use std::env;
 
+//use serenity::{
+//    async_trait,
+//    model::{channel::Message, gateway::Ready},
+//    prelude::*,
+//};
 use serenity::{
     async_trait,
-    model::{channel::Message, gateway::Ready},
+    client::bridge::gateway::{GatewayIntents, ShardManager},
+//    framework::standard::{macros::group, StandardFramework},
+    http::Http,
+    model::{
+        channel::Message,
+        event::MessageUpdateEvent,
+        gateway::Ready,
+        guild::{Member, Role},
+        id::{ChannelId, GuildId, MessageId, RoleId},
+        user::User,
+    },
     prelude::*,
 };
 
@@ -107,6 +122,22 @@ impl EventHandler for Handler {
 
 
     }
+
+    async fn guild_member_addition(&self, ctx: Context, guild_id: GuildId, mut new_member: Member) {
+        let channel_id = ChannelId::from(510553881764298766 as u64);
+        if let Err(why) = channel_id.say(&ctx.http, ("hey look, its a ".to_owned() + &new_member.user.mention())).await {
+            println!("Error sending message: {:?}", why);
+        }
+    }
+
+    async fn guild_member_removal(&self, ctx: Context, guild_id: GuildId, user: User) {
+        let channel_id = ChannelId::from(510553881764298766 as u64);
+        if let Err(why) = channel_id.say(&ctx.http, ("goodbye ".to_owned() + &user.name)).await {
+            println!("Error sending message: {:?}", why);
+        }
+    }
+
+
 
     // Set a handler to be called on the `ready` event. This is called when a
     // shard is booted, and a READY payload is sent by Discord. This payload
