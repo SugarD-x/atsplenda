@@ -85,7 +85,7 @@ impl EventHandler for Handler {
         }
         if msg.content.to_lowercase().contains("peter") {
             //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "coming soon").await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "feature coming soon").await {
                 println!("Error sending message: {:?}", why);
             }
         }
@@ -124,7 +124,7 @@ impl EventHandler for Handler {
 
     }
 
-    async fn guild_member_addition(&self, ctx: Context, guild_id: GuildId, mut new_member: Member) {
+    async fn guild_member_addition(&self, ctx: Context, guild_id: GuildId, new_member: Member) {
         let channel_id = ChannelId::from(510553881764298766 as u64);
         if let Err(why) = channel_id.say(&ctx.http, ("hey look, its a ".to_owned() + &new_member.user.mention())).await {
             println!("Error sending message: {:?}", why);
@@ -146,8 +146,15 @@ impl EventHandler for Handler {
     // private channels, and more.
     //
     // In this case, just print what the current user's username is.
-    async fn ready(&self, _: Context, ready: Ready) {
+    async fn ready(&self, ctx: Context, ready: Ready) {
         println!("{} is connected!", ready.user.name);
+        use serenity::model::gateway::Activity;
+        use serenity::model::user::OnlineStatus;
+
+        let game = Activity::playing("Minecraft, but for bots");
+        let status = OnlineStatus::Idle;
+
+        ctx.set_presence(Some(game), status).await;
     }
 }
 
