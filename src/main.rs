@@ -1,15 +1,8 @@
 use std::env;
 
-//use serenity::{
-//    async_trait,
-//    model::{channel::Message, gateway::Ready},
-//    prelude::*,
-//};
 use serenity::{
     async_trait,
-    client::bridge::gateway::{GatewayIntents, ShardManager},
-//    framework::standard::{macros::group, StandardFramework},
-    http::Http,
+//    http::Http,
     model::{
         channel::Message,
         event::MessageUpdateEvent,
@@ -43,54 +36,44 @@ impl EventHandler for Handler {
             if let Err(why) = msg.channel_id.say(&ctx.http, "LASAGNA!!!").await {
                 println!("Error sending message: {:?}", why);
             }
-
         }
-
         if msg.content.starts_with("I'm") {
-            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
             let copied = msg.content.replace("I'm", "");
             if let Err(why) = msg.channel_id.say(&ctx.http, ("Hi".to_owned() + &copied + ", I'm dad.")).await {
                 println!("Error sending message: {:?}", why);
             }
         }
         if msg.content.contains("uwu") {
-            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
             if let Err(why) = msg.channel_id.say(&ctx.http, "OwO").await {
                 println!("Error sending message: {:?}", why);
             }
         }
         if msg.content.contains("oof") {
-            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
             if let Err(why) = msg.channel_id.say(&ctx.http, "no").await {
                 println!("Error sending message: {:?}", why);
             }
         }
         if msg.content.contains("mallcop") {
-            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
             if let Err(why) = msg.channel_id.say(&ctx.http, "A mustache a day keeps the shoplifters at bay").await {
                 println!("Error sending message: {:?}", why);
             }
         }
         if msg.content.to_lowercase().contains("nooo") {
-            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
             if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/no-theoffice-stevecarrell-michaelscott-gif-4652931").await {
                 println!("Error sending message: {:?}", why);
             }
         }
         if msg.content.to_lowercase().contains("bad bot") {
-            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
             if let Err(why) = msg.channel_id.say(&ctx.http, "you're not my dad").await {
                 println!("Error sending message: {:?}", why);
             }
         }
         if msg.content.to_lowercase().contains("peter") {
-            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
             if let Err(why) = msg.channel_id.say(&ctx.http, "feature coming soon").await {
                 println!("Error sending message: {:?}", why);
             }
         }
         if msg.content.to_lowercase().contains(":(") {
-            //if let Err(why) = msg.channel_id.say(&ctx.http, msg.content).await {
             if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/30rock-alec-baldwin-there-there-cheer-up-comfort-gif-4215371").await {
                 println!("Error sending message: {:?}", why);
             }
@@ -120,8 +103,6 @@ impl EventHandler for Handler {
                 println!("Error sending message: {:?}", why);
             }
         }
-
-
     }
 
     async fn guild_member_addition(&self, ctx: Context, guild_id: GuildId, new_member: Member) {
