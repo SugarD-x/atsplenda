@@ -1,14 +1,16 @@
 use std::env;
-
+use tokio;
 use serenity::{
     async_trait,
 //    http::Http,
     model::{
         channel::Message,
-        event::MessageUpdateEvent,
+//        event::MessageUpdateEvent,
         gateway::Ready,
-        guild::{Member, Role},
-        id::{ChannelId, GuildId, MessageId, RoleId},
+//        guild::{Member, Role},
+        guild::Member,
+//        id::{ChannelId, GuildId, MessageId, RoleId},
+        id::{ChannelId, GuildId},
         user::User,
     },
     prelude::*,
@@ -83,7 +85,7 @@ impl EventHandler for Handler {
                 println!("Error sending message: {:?}", why);
             }
         }
-        if msg.content.starts_with("XD") {
+        if msg.content.to_lowercase().contains("xd") {
             if let Err(why) = msg.channel_id.say(&ctx.http, "lulz").await {
                 println!("Error sending message: {:?}", why);
             }
@@ -105,21 +107,19 @@ impl EventHandler for Handler {
         }
     }
 
-    async fn guild_member_addition(&self, ctx: Context, guild_id: GuildId, new_member: Member) {
+    async fn guild_member_addition(&self, ctx: Context, _guild_id: GuildId, new_member: Member) {
         let channel_id = ChannelId::from(510553881764298766 as u64);
         if let Err(why) = channel_id.say(&ctx.http, ("hey look, its a ".to_owned() + &new_member.user.mention())).await {
             println!("Error sending message: {:?}", why);
         }
     }
 
-    async fn guild_member_removal(&self, ctx: Context, guild_id: GuildId, user: User) {
+    async fn guild_member_removal(&self, ctx: Context, _guild_id: GuildId, user: User) {
         let channel_id = ChannelId::from(510553881764298766 as u64);
         if let Err(why) = channel_id.say(&ctx.http, ("goodbye ".to_owned() + &user.name)).await {
             println!("Error sending message: {:?}", why);
         }
     }
-
-
 
     // Set a handler to be called on the `ready` event. This is called when a
     // shard is booted, and a READY payload is sent by Discord. This payload
@@ -148,7 +148,7 @@ async fn main() {
     // Create a new instance of the Client, logging in as a bot. This will
     // automatically prepend your bot token with "Bot ", which is a requirement
     // by Discord for bot users.
-    let mut client = Client::new(&token)
+    let mut client = Client::builder(&token)
         .event_handler(Handler)
         .await
         .expect("Err creating client");
