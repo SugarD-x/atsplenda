@@ -1,5 +1,6 @@
 use std::env;
 use tokio;
+//use serenity::model::channel::AttachmentType;
 use serenity::{
     async_trait,
 //    http::Http,
@@ -16,97 +17,74 @@ use serenity::{
     prelude::*,
 };
 
+/*
+use std::env::args;
+use tokio::prelude::*;
+use serenity::model::channel::MessageAttachment;
+use serenity::{
+    async_trait,
+    model::{
+        channel::Message,
+        gateway::Ready,
+        guild::Member,
+        id::{ChannelId, GuildId},
+        user::User,
+    },
+    prelude::*,
+};*/
+
 struct Handler;
 
 #[async_trait]
 impl EventHandler for Handler {
-    // Set a handler for the `message` event - so that whenever a new message
-    // is received - the closure (or function) passed will be called.
-    //
-    // Event handlers are dispatched through a threadpool, and so multiple
-    // events can be dispatched simultaneously.
     async fn message(&self, ctx: Context, msg: Message) {
+        // Don't respond to messages from other bots.
         if msg.author.bot {
             return;
         }
 
-        if msg.content == "bitch" {
-            // Sending a message can fail, due to a network error, an
-            // authentication error, or lack of permissions to post in the
-            // channel, so log to stdout when some error happens, with a
-            // description of it.
-            if let Err(why) = msg.channel_id.say(&ctx.http, "LASAGNA!!!").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.starts_with("I'm") {
-            let copied = msg.content.replace("I'm", "");
-            if let Err(why) = msg.channel_id.say(&ctx.http, ("Hi".to_owned() + &copied + ", I'm dad.")).await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.contains("uwu") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "OwO").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.contains("oof") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "no").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.contains("mallcop") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "A mustache a day keeps the shoplifters at bay").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.to_lowercase().contains("nooo") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/no-theoffice-stevecarrell-michaelscott-gif-4652931").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.to_lowercase().contains("bad bot") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "you're not my dad").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.to_lowercase().contains("peter") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "feature coming soon").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.to_lowercase().contains(":(") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/30rock-alec-baldwin-there-there-cheer-up-comfort-gif-4215371").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.starts_with("D:") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "shocking").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.to_lowercase().contains("xd") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "lulz").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.to_lowercase() == "f" {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "salute to the fallen https://tenor.com/view/press-f-pay-respect-keyboard-gif-12855017").await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.contains("@splenda") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, (msg.author.to_string() + " mentioned you, splenda. <@385933420389335061>")).await {
-                println!("Error sending message: {:?}", why);
-            }
-        }
-        if msg.content.contains("wow") {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/owen-wilson-wow-snapchat-gif-12686549").await {
-                println!("Error sending message: {:?}", why);
-            }
+        // Map from trigger words/phrases to responses.
+        let triggers = [
+            ("bitch", "LASAGNA!!!"),
+            ("I'm", "Hi %, I'm dad."),
+            ("uwu", "OwO"),
+            ("oof", "no"),
+            ("mallcop", "A mustache a day keeps the shoplifters at bay"),
+            ("nooo", "https://tenor.com/view/no-theoffice-stevecarrell-michaelscott-gif-4652931"),
+            ("bad bot", "you're not my dad"),
+            ("peter", "feature coming soon"),
+            (":(", "https://tenor.com/view/30rock-alec-baldwin-there-there-cheer-up-comfort-gif-4215371"),
+        ];
+
+        // Check if any of the trigger words/phrases appear in the message.
+        let response = triggers
+            .iter()
+            .filter(|(trigger, _)| msg.content.to_lowercase().contains(trigger))
+            .map(|(_, response)| response)
+            .nth(0);
+
+
+        // If a trigger word/phrase was found, send the corresponding response.
+        if let Some(response) = response {
+//            if response == "peter.mp4" {
+                // If the response is "peter.mp4", send the file with that name.
+
+//                let file = serenity::http::MessageAttachment::Path {
+//                    file: "resources/peter.mp4",
+//                    name: Some("peter.mp4"),
+//                };
+//                if let Err(why) = msg.channel_id.send_message(&ctx.http, |m| m.add_file(file)).await {
+//                    println!("Error sending message: {:?}", why);
+//                }
+//            } else {
+                // Otherwise, send the response as a regular message.
+                if let Err(why) = msg.channel_id.say(&ctx.http, response).await {
+                    println!("Error sending message: {:?}", why);
+                }
+//            }
+            println!("{}", response);
         }
     }
-
     async fn guild_member_addition(&self, ctx: Context, _guild_id: GuildId, new_member: Member) {
         let channel_id = ChannelId::from(510553881764298766 as u64);
         if let Err(why) = channel_id.say(&ctx.http, ("hey look, its a ".to_owned() + &new_member.user.mention())).await {
